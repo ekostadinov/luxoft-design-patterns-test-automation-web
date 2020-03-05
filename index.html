@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Design patterns and concepts in test automation</title>
+	<title>Advanced design patterns in web test automation</title>
 	</title>
 	<meta name="author" content="Evgeni Kostadinov">
 	<meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,38 +35,20 @@
 		<div class="slides">
 			<section>
 				<div>
-					<h2>Design patterns and concepts</h2>
-					<h3>In Test automation</h3>
-					<img width="600" height="250" data-src="images/sydney.jpg" alt="cloud-pattern">
+					<h2>Advance Design Patterns</h2>
+					<h3>In Web Test automation</h3>
+					<img width="600" height="250" data-src="images/fe.png" alt="frontend"
+						style="background: none !important;">
 				</div>
 			</section>
 
 			<section>
 				<h2>Topics in the <b style="color:red;">series</b></h2>
-				<p>1. Design <b style="color:red;">patterns and concepts</b> in test automation</p>
+				<p>1. Design patterns and concepts in test automation</p>
 				<p class="fragment">
-					2. Advanced design patterns in web test automation</p>
+					2. Advanced design patterns in <b style="color:red;">web</b> test automation</p>
 				<p class="fragment">
 					3. Advanced design patterns - Desktop, API, Data warehouse</p>
-			</section>
-			<section>
-				<h2>Test automation patterns</h2>
-				<br>
-					 <b style="color:red;">Process</b> Patterns</br>
-						How set up or improve the test automation process.
-					 </p>
-				<p class="fragment">
-					<b style="color:red;">Management</b> Patterns </br>
-					How to manage test automation in the development process.
-					</p>
-				<p class="fragment">
-					<b style="color:red;">Design</b> Patterns </br>
-					How to design efficient and easy to maintaine automation <b>testware</b>.
-					</p>
-				<p class="fragment">
-					<b style="color:red;">Execution</b> Patterns </br>
-					How to take care that test execution is easy and reliable. 
-				</p>
 			</section>
 
 			<section class="stack present" data-previous-indexv="0">
@@ -74,18 +56,18 @@
 					<h2>Table of contents</h2>
 					<ol>
 						<li>
-							<p data-fragment-index="4">Test harness <b style="color:red;">architecture</b>
+							<p data-fragment-index="4">Mobile testing considerations
 							</p>
 						</li>
 						<li>
-							<p class="fragment" data-fragment-index="1"> <b style="color:red;">Design</b> patterns and concepts in test automation
+							<p class="fragment" data-fragment-index="1">Beyond Page objects
 							</p>
 						</li>
 						<li>
-							<p class="fragment " data-fragment-index="2"> <b style="color:red;">xUnit</b> patterns</p>
+							<p class="fragment " data-fragment-index="2">Advanced patterns</p>
 						</li>
 						<li>
-							<p class="fragment  " data-fragment-index="3"> <b style="color:red;">CICD</b> pipelines</p>
+							<p class="fragment  " data-fragment-index="3">Good practices</p>
 						</li>
 					</ol>
 				</section>
@@ -93,450 +75,492 @@
 
 			<section>
 				<section>
-					<h2>Test harness architecture</h2>
-					<img width="550" height="300" data-src="images/framework.jpeg" alt="framework">
+					<h2>Mobile testing considerations</h2>
+					<img width="550" height="300" data-src="images/mobile.png" alt="mobile">
 				</section>
 				<section>
-					<h2>Automated test framework</h2>
-					<p>Test harness is a
-						collection of software and test data configured to test a
-						program unit by running it under varying conditions and
-						monitoring its behavior and outputs. It has three main parts:
-						<p class="fragment">the test execution <b style="color:red;">engine</b> (a.k.a Core features),
-						</p>
-						<p class="fragment">test <b style="color:red;">scripts</b> (our Business domain model)</p
-							class="fragment">
-						<p class="fragment">and the test <b style="color:red;">data</b></p>
+					<h2>Challenges</h2>
+					<p>Heavy <b style="color:red;">environment</b> and infrastructure setup.</p>
+					<p class="fragment">Executing tests <b style="color:red;">in parallel.</b></p>
+					<p class="fragment">How to leverage <b style="color:red;">common code</b> as much as possible and
+						drive the
+						web/mobile workflow based on the configuration. Less code, less maintenance.</p>
 				</section>
 				<section>
-					<h2>Test code is <b style="color:red;">Production</b> code</h2>
-					<p class="fragment"><b style="color:red;">Same</b> concepts, principles and care should be applied.
-					</p>
-					<p class="fragment"><b style="color:red;">SDLC</b> phases too!</p>
-					<p class="fragment">Meaning, we should <b style="color:red;">unit test</b> our Engine design and
-						logic.</p>
-					<p class="fragment"><b style="color:red;">Workflow and good practices</b>, like Git branching.</p>
-					<p class="fragment">Maintenance and low complexity are <b style="color:red;">most cfitical</b>.</p>
-				</section>
-				<section>
-					<h2><b style="color:red;">Architecture</b> of the framework</h2>
-					<p>It's the highest level of <b style="color:red;">abstraction</b> of a system. What kind of data is
-						used (static, generators, files), how do modules interact with each other, reporting and
-						logging.</p>
-					<p class="fragment">Then move to <b style="color:red;">chooce</b> the frameworks, languages, scope,
-						goals, 3th party dependencies and integrations</p>
-				</section>
-				<section>
-					<h2><b style="color:red;">Types</b> of Automation Frameworks</h2>
-					<p><b style="color:red;">Record & Playback</b>, has its place under the sun. With disposable tests,
-						simple setup and no coding skills required - fits perfectly in short lived projects or non
-						technical team. </p>
-					<p class="fragment">The recorded tests should <b style="color:red;">not</b> be fixed! Rather, used
-						only until fit, to free time and support you. </p>
-				</section>
-				<section>
-					<h2><b style="color:red;">Types</b> of Automation Frameworks (2)</h2>
-					<p><b style="color:red;">Modular and Data-Driven</b> frameworks rely on different modules or
-						exported scripts that are later combined into more complex tests.</p>
-					<p class="fragment"> Data <b style="color:red;">layer</b> is added on top of other types, so to
-						segregate the test script logic and the test data from each other. Also, to power up the input
-						combinations.</p>
-				</section>
-				<section>
-					<h2><b style="color:red;">Types</b> of Automation Frameworks (3)</h2>
-					<p>A <b style="color:red;">Library</b> framework, upgrade the Module-Based Testing one, by
-						segregating the application into common functions. It can determine the common steps, group them
-						into functions under a library, and call those functions in the test scripts whenever required.
-					</p>
-					<p class="fragment"><b style="color:red;">Keyword-Driven</b> frameworks lay out each function of the
-						application under test
-						in a table with a series of
-						instructions in consecutive order for each test that needs to be run. The test data and script
-						logic are again separated.</p>
-				</section>
-				<section>
-					<h2><b style="color:red;">Types</b> of Automation Frameworks (4)</h2>
-					<p>A <b style="color:red;">Behavior-Driven Development</b> frameworks, lay out easily readable and
-						understandable format for the stakeholders. The BDD markups are integrated well with the
-						programming IDEs.
-					</p>
-					<p class="fragment"><b style="color:red;">Hybrid </b> testing frameworks is a combination of more
-						than one of the before mentioned ones. The best thing about such a setup is that it leverages
-						the
-						benefits of all kinds of associated frameworks.</p>
-				</section>
-				<section>
-					<h2><b style="color:red;">Types</b> of Automation Frameworks (5)</h2>
-					<p><b style="color:red;">AI-powered</b> frameworks are mostly bare promises for systems that can
-						write automated
-						tests automatically, codeless tests, or effortless/almost zero test maintenance.
-					</p>
-					<p class="fragment"><b style="color:red;">Future </b> of testing is yet to be achieved!</p>
+					<h2>Challenges (2)</h2>
+					<p>Device <b style="color:red;">fragmentation</b> should be limited, so it doesn't negatively affect our setup.</p>
+					<p class="fragment">Screen size and OS fragmentation too, have to be <b style="color:red;">carefully</b> picked up.</p>
+					<p class="fragment"><b style="color:red;">Localisation</b> when it comes to users being able to change the app language to their own.</p>
 				</section>
 			</section>
 
 
 			<section>
 				<section>
-					<h2>Design patterns and concepts in test automation</h2>
-					<img width="550" height="300" data-src="images/blackboard.jpg" alt="blackboard">
+					<h2><b style="color:red;">Beyond</b> page objects</h2>
+					<img src="images/champagne.png" alt="wrong-design">
 				</section>
 				<section>
-					<h2>Design <b style="color:red;">principles</b></h2>
-					<p>A principle is a <b style="color:red;">type of concept</b>. A concept is an idea about something.
-						A principle is ordinarily
-						meant to represent a special <b style="color:red;">relationship or rule</b> that is required or
-						expected to be in effect.
-					</p>
-					<p class="fragment"> Design principles provide high level guidelines to <b style="color:red;">design
-							better software</b>
-						applications. They do not provide implementation guidelines and are not bound to any programming
-						language.
-					</p>
-				</section>
-				<section>
-					<h2><b style="color:red;">SOLID</b> Principles</h2>
-					<p><b style="color:red;">Single Responsibility</b>, states that class should have one, and only one,
-						reason to change.</p>
-					<p class="fragment"><b style="color:red;">Open-closed Principle</b>:
-						Software entities should be extendable without actually changing their contents. </p>
-					<p class="fragment"><b style="color:red;">Liskov Substitution</b> simply means, that
-						a subclass class should be substitutable for their parent.</p>
-					<p class="fragment"><b style="color:red;">Interface Segregation</b>, implies that one should break
-						down the interfaces
-						in many smaller ones, so they better satisfy the exact needs of our clients.</p>
-					<p class="fragment"><b style="color:red;">Dependency Inversion</b> can be boiled down to Depend on
-						Abstractions not on implementation details.</p>
-				</section>
-				<section>
-					<h2>Other Principles</h2>
-					<p><b style="color:red;">Don't repeat yourself</b> aims to reduce repetition of code,
-						replacing it with abstractions or using data normalization to avoid redundancy.</p>
-					<p class="fragment"><b style="color:red;">You Ain't Gonna Need It</b>, advises not to add
-						functionality
-						until deemed necessary.</p>
-					<p class="fragment"><b style="color:red;">Keep It Simple, Stupid</b> states that most systems work
-						best
-						if they are kept simple rather than made complicated.</p>
-				</section>
-				<section data-transition="none">
-					<h2>Putting it all <b style="color:red;">together</b></h2>
-					<img width="750" height="500" data-src="images/dry.png" alt="dry">
-				</section>
-				<section data-transition="none">
-					<h2>Putting it all <b style="color:red;">together</b></h2>
-					<img width="750" height="500" data-src="images/dry1.png" alt="dry">
-				</section>
-				<section data-transition="none">
-					<h2>Putting it all <b style="color:red;">together</b></h2>
-					<img width="750" height="500" data-src="images/dry2.png" alt="dry">
-				</section>
-				<section data-transition="none">
-					<h2>Putting it all <b style="color:red;">together</b></h2>
-					<img width="750" height="500" data-src="images/dry2a.png" alt="dry">
-				</section>
-				<section data-transition="none">
-					<h2>Putting it all <b style="color:red;">together</b></h2>
-					<img width="750" height="500" data-src="images/dry2b.png" alt="dry">
-				</section>
-				<section data-transition="none">
-					<h2>Putting it all <b style="color:red;">together</b></h2>
-					<img width="750" height="500" data-src="images/dry2c.png" alt="dry">
-				</section>
-				<section data-transition="none">
-					<h2>Putting it all <b style="color:red;">together</b></h2>
-					<img width="750" height="500" data-src="images/dry3.png" alt="dry">
-				</section>
-			</section>
-			<section>
-				<section>
-					<h2>xUnit patterns</h2>
-					<img width="550" height="300" data-src="images/xunit.jpg" alt="xunit">
-				</section>
-				<section>
-					<h2><b style="color:red;">xUnit</b> Family</h2>
-					<p>xUnit tools, and <b style="color:red;">more importantly the philosophy</b>,
-						offer up a huge opportunity to programming teams. </p>
-					<p class="fragment">An opportunity to write<b style="color:red;"> powerful regression
-							test suites</b>
-						that enable teams to make drastic changes to a code-base with far less risk.
-					</p>
-					<p class="fragment">Opportunities to <b style="color:red;">re-think the design</b> process with Test
-						Driven Development.
-					</p>
-				</section>
-				<section>
-					<h2><b style="color:red;">xUnit</b> Patterns</h2>
-					<p>There are <b style="color:red;">more than 60</b>,
-						reusable solutions to a commonly occurring problems within a given testing context.</p>
-					<p class="fragment">Making tests<b style="color:red;"> first class citizens</b>.
-					</p>
-					<p class="fragment">Will improve your framework structure, allowing
-						clean and small, yet powerful extensions.</p>
-				</section>
-				<section>
-					<h2>Golden hammer</h2>
-					<blockquote cite="">
-						"If all you have is a hammer, everything looks like a nail."
-					</blockquote>
-					<p class="fragment">Programmers usually go through,</p>
-					<p class="fragment">having <b style="color:red;">no idea</b> about Design patterns ...</p>
-					<p class="fragment">to <b style="color:red;">force</b> everything into patterns ...</p>
-					<p class="fragment">to ... <b style="color:red;">don't blindly follow</b> patterns, but allow them
-						to emerge from the solution.</p>
-				</section>
-				<section>
-					<img src="images/int_vs_em_arch.jpg" alt="design">
-				</section>
-				<section>
-					<h2>Design for testing</h2>
-					<p>Set of techniques that <b style="color:red;">add testability features</b> to a (hardware) product
-						design. The added features make it
-						easier to develop and apply manufacturing tests to the designed hardware. </p>
-				</section>
-				<section data-transition="none">
-					<h2>Design for testing (2)</h2>
-					<p><b style="color:red;">D</b>ependency <b style="color:red;">I</b>njection, relies on client to
-						provide the depended-on object to the SUT.
-					</p>
-					<img width="750" height="400" data-src="images/DI.gif" alt="dry">
-				</section>
-				<section data-transition="none">
-					<h2>Design for testing (2)</h2>
-					<p><b style="color:red;">D</b>ependency <b style="color:red;">I</b>njection, relies on client to
-						provide the depended-on object to the SUT.
-					</p>
-					<img width="750" height="400" data-src="images/DI2.gif" alt="">
-				</section>
-				<section >
-					<h2>Design for testing (3)</h2>
-					<p>Dependency <b style="color:red;">Lookup</b> allows the SUT to asks another
-						object to return the depended-on object before it uses it.
-					</p>
-					<img width="750" height="400" data-src="images/DL.gif" alt="">
-				</section>
-				<section data-transition="none">
-					<h2>Design for testing (3)</h2>
-					<p>Dependency <b style="color:red;">Lookup</b> allows the SUT to asks another
-						object to return the depended-on object before it uses it.
-					</p>
-					<img width="750" height="400" data-src="images/DL2.gif" alt="">
-				</section>
-				<section>
-					<h2>Design for testing (4)</h2>
-					<p><b style="color:red;">Humble Object</b>, extracts the logic into a separate
-						easy-to-test component that is decoupled from its
-						environment.</p>
-					<img width="750" height="400" data-src="images/HO.gif" alt="">
-			    </section>
-				<section>
-					<h2>Design for testing (5)</h2>
-					<p><b style="color:red;">Test Hook</b> is SUT modification that allows it to
-						behave differently during the test.</p>
-					<img width="750" height="400" data-src="images/TH.gif" alt="">
-				</section>
-				<section>
-					<h2>Fixture <b style="color:red;">Setup</b> Patterns</h2>
+					<h2>BEWARE OF LIMITATIONS</h2>
 					<p>
-						<b style="color:red;">Delegated </b>Setup - Each test creates its own Fresh Fixture by calling
-						Creation Methods from within the Test Methods.
-					</p>
-					<img width="750" height="400" data-src="images/delegated-setup.gif" alt="">
-				</section>
-				<section>
-						<h2>Fixture <b style="color:red;">Setup</b> Patterns</h2>
-					<p>
-						<b style="color:red;">Suite</b> Fixture Setup - We build/destroy the shared fixture in special
-						methods called by the Test Automation Framework before/after the first/last Test Method is
-						called.
-					</p>
-					<img width="750" height="400" data-src="images/suitefixture-setup.gif" alt="">
-				</section>
-				<section>
-						<h2>Fixture <b style="color:red;">Setup</b> Patterns</h2>
-					<p >
-						<b style="color:red;">Prebuilt</b> Fixture - Build the Shared Fixture separately from running
-						the tests.
-					</p>
-					<img width="750" height="400" data-src="images/prebuilt-fixture.gif" alt="">
-			</section>
-				<section>
-						<h2>Fixture <b style="color:red;">Setup</b> Patterns</h2>
-					<p>
-						<b style="color:red;">Inline</b> Setup - Each Test Method creates it's own Fresh Fixture by
-						calling the appropriate constructor methods to build exactly the test fixture it requires.
-					</p>
-					<img width="750" height="400" data-src="images/inline-setup.gif" alt="">
-				</section>
-				<section>
-					<h2>Fixture <b style="color:red;">Teardown</b> Patterns</h2>
-					<p>
-						<b style="color:red;">Automated </b>Teardown - a track is kept of all resources that are created
-						in a test and automatically destroy/free them during
-						teardown.
-					</p>
-					<img width="750" height="400" data-src="images/automated-teardown.gif" alt="">
-				</section>
-				<section data-transition="none">
-					<h2>Fixture <b style="color:red;">Teardown</b> Patterns</h2>
-					<p>
-						<b style="color:red;">Automated </b>Teardown - a track is kept of all resources that are created
-						in a test and automatically destroy/free them during
-						teardown.
-					</p>
-					<img width="750" height="400" data-src="images/automated-teardown2.gif" alt="">
-				</section>
-				<section data-transition="none">
-					<h2>Fixture <b style="color:red;">Teardown</b> Patterns</h2>
-					<p>
-						<b style="color:red;">Automated </b>Teardown - a track is kept of all resources that are created
-						in a test and automatically destroy/free them during
-						teardown.
-					</p>
-					<img width="750" height="400" data-src="images/automated-teardown3.gif" alt="">
-				</section>
-				<section>
-					<h2>Fixture <b style="color:red;">Teardown</b> Patterns</h2>
-					<p>
-						<b style="color:red;">Inline</b> Teardown - include teardown logic at the end of the Test Method
-						immediately after the result verification.
-					</p>
-					<img width="750" height="400" data-src="images/inline-teardown.gif" alt="">
-			</section>
-				<section>
-					<h2>Fixture <b style="color:red;">Teardown</b> Patterns</h2>
-					<p>
-						<b style="color:red;">Garbage-Collected</b> Teardown - We let the garbage collection mechanism
-						provided by the programming language clean up after our
-						test.
-					</p>
-					<img width="750" height="400" data-src="images/garbage-collected-teardown.gif" alt="">
-			</section>
-				<section>
-					<h2>Fixture <b style="color:red;">Teardown</b> Patterns</h2>
-					<p>
-						<b style="color:red;">Implicit</b> Teardown - The Test Automation Framework calls our clean up
-						logic in the tearDown method after every Test
-						Method.
-					</p>
-					<img width="750" height="400" data-src="images/implicit-teardown.gif" alt="">
-				</section>
-			</section>
-			<section>
-				<section>
-					<h2>CICD pipelines</h2>
-					<img src="images/pipetrain.jpg" alt="pipelines">
-				</section>
-				<section>
-					<h2><b style="color:red;">Continuous</b> integration</h2>
-					<p>
-						Is <b style="color:red;">more</b> than a CI server.
+						<b style="color:red;">Wrong by design</b>, as the object knows how to acts upon itself.
 					</p>
 					<p class="fragment">
-						Software engineering <b style="color:red;">practice</b> in which isolated changes are merged to
-						a shared mainline at least once a day.
+						Often leads to entire PageObject complex abstraction layer and <b
+							style="color:red;">taxonomy</b>.
 					</p>
 					<p class="fragment">
-						The goal of CI is to provide
-						<b style="color:red;">rapid feedback</b> so that if a defect is introduced into the
-						code base, it can be identified and corrected as soon as
+						Selectors are hardcoded in your objects, so <b style="color:red;">no configuration</b> is
 						possible.
 					</p>
 				</section>
 				<section>
-					<h2><b style="color:red;">Continuous</b> integration (2)</h2>
-					<p>Because CI detects deficiencies early on in development,
-						<b style="color:red;">defects</b> are typically smaller, less complex and easier to
-						resolve.</p>
-					<p class="fragment">
-						Always design automation <b style="color:red;">tests to run on a CI</b> pipelines. Real value is
-						provided there.
-					</p>
-				</section>
-				<section>
-					<h2><b style="color:red;">CI</b> patterns</h2>
+					<h2>BEWARE OF LIMITATIONS (2)</h2>
 					<p>
-						Build software at <b style="color:red;">every change</b> - merged into
-						master. Goal is to immediately identify when problems occur.
+						<b style="color:red;">Automatically built</b> Page Objects are hard to maintain and to use.
+						 Pretty much no grouping of elements into headers and footers, or identified widgets, 
+						 there would just be a big list of stuff.
 					</p>
 					<p class="fragment">
-						<b style="color:red;">Version</b> Control is one of the central pillars of CI, with industry-standard practices, like:
-						<ul class="fragment">
-							<li>Private Workspace</li>
-							<li>
-								Repository
-							</li>
-							<li>Master branch</li>
-							<li>Branching Policy </li>
-						</ul>
-					</p>
-				</section>
-				<section>
-					<h2><b style="color:red;">CI</b> patterns (2)</h2>
-					<p>
-						<b style="color:red;">Task</b>-level commit integrate enough progress work as contributions.
+						It might <b	style="color:red;">limit your design</b>, e.g. you staring to ignore better abstractions.
 					</p>
 					<p class="fragment">
-						<b style="color:red;">Label</b> build helps with setting milestones, usually a release, to mark important phase.
+						 <b style="color:red;">Hinders</b> flexibility when refactoring (both structure and function).
 					</p>
-					<p class="fragment">
-						Build <b style="color:red;">management</b> relies on CI server hooks and workflows.
-					</p>
-					<p class="fragment">
-						<b style="color:red;">Expedite fixes</b> help us with resolving ocassional build isses, via pulling only from master branch and broken builds immediate fixing.
-					</p>
-				</section>
-				<section>
-					<h2><b style="color:red;">Low-risk</b> releases</h2>
-					<p>
-						Are <b style="color:red;">Incremental</b>, our systems should be able to release individual changes independently.
-					</p>
-					<p class="fragment">
-						<b style="color:red;">Decouple</b> Deployment and Release helps us to roll out new versions of the system with no downtime required.
-					</p>
-					<p class="fragment">
-						Focus on <b style="color:red;">Reducing</b> batch size, pushes for frequent and smaller deployments.
-					</p>
-					<p>
-						Optimize for <b style="color:red;">Resilience</b>, shifts effort from preventing problems, to restoring as rapidly as possible when something goes wrong. 
-					</p>
-				</section>
-				<section>
-					<h2>Continuous<b style="color:red;"> Delivery</b></h2>
-					<p> Is the <b style="color:red;">ability</b> to get all changes into production, or into the hands
-						of users, safely and
-						quickly in a sustainable way.</p>
-					<p class="fragment">
-						Predictable, routine affairs that can be performed <b style="color:red;">on demand</b>.
-					</p>
-					<p class="fragment">
-						<b style="color:red;">Smoke </b> Test Pattern can execute a set of tests that are run to verify
-						the basic functionality of a build.
-					</p>
-				</section>
-				<section>
-					<img src="images/cicdcd.png" alt="" height="300" width="600">
 				</section>
 			</section>
+
+			<section>
+				<section>
+					<h2>Other Patterns</h2>
+					<img src="images/chair.jpg" alt="better design">
+				</section>
+				<section>
+					<h2>Object <b style="color:red;">Map</b></h2>
+					<p>
+						File that maintains a <b style="color:red;">logical representation</b> of each application
+						object
+						that is referenced in an automated script. The purpose of the Object
+						Map is to allow for the <b style="color:red;">separation</b> of application object property data
+						known as the Physical Description, from the automated script via a
+						parameter known as the Logical Name.
+					</p>
+					<p class="fragment">
+						Use one <b style="color:red;">single point of entry</b> to store objects of any type in memory
+						and retrieve them using a unique identifier. Assure that only one
+						instance of an object exists for each specific data-item.
+					</p>
+				</section>
+				<section>
+					<h2>Object <b style="color:red;">Map</b>(2)</h2>
+					<img src="images/objmap.png" alt="objmap" style="background: #eee8d5">
+				</section>
+				<section>
+					<h2>Python example</h2>
+					<pre>test_data/objectmap.yaml
+						<code class="hljs yaml has-highlights" data-trim="" data-line-numbers="4,8-9">
+							login_username:
+    locator: name
+    selector: username
+login_password:
+    locator: name
+    selector: password
+login_button:
+    locator: class
+    selector: btn-main-green
+...
+                        </code></pre>
+				</section>
+				<section>
+					<h2>Python example</h2>
+					<pre>core/elements_loader.py
+						<code class="hljs python has-highlights" data-trim="" data-line-numbers="4,8-9">
+							from selenium.webdriver.common.by import By
+
+# avoid ContextInjection at this layer, if using Cucumber 
+def get_by_key(driver, element_name, object_map):
+    # avoid complex if-else constructs
+    find_by = {
+      'xpath': driver.find_element_by_xpath,
+      'css': driver.find_element_by_css_selector,
+      ...
+    }
+    ui_element_locator = object_map[element_name]['locator']
+    ui_element_selector = object_map[element_name]['selector']
+    # optional webdriver wait for element
+
+    return find_by[ui_element_locator](ui_element_selector)
+						</code></pre>
+				</section>
+				<section>
+					<h2>Python example</h2>
+					<pre>dsl/issues.py
+						<code class="hljs python has-highlights" data-trim="" data-line-numbers="4,8-9">
+							from core import elements_loader
+
+def add_new_issue(context, title):
+   # other related domain specific flow and actions
+    elements_loader.get_by_key(context.session.driver, 'name_input', 
+                               context.object_map).send_keys(title)
+    elements_loader.get_by_key(context.session.driver, 'save_button', 
+                               context.object_map).click()
+						</code></pre>
+				</section>
+				<section>
+					<h2>Python example</h2>
+					<pre>spec/edit_issue_tests.py
+						<code class="hljs python has-highlights" data-trim="" data-line-numbers="4,8-9">
+							from dsl import issues
+from random import randrange
+
+def editing_issue_name_should_save_changes(context):
+   # test data could be fetched from elsewhere
+   new_issue_title = 'My valid issue title'
+   edited_issue_title = new_issue_title + str(randrange(10000))
+   # setup
+   issues.add_new_issue(context, issue_title)
+   # actual test
+   issues.edit_issue(context, edited_issue_title)
+   issue.verify_issue_title(context, edited_issue_title)
+						</code></pre>
+				</section>
+				<section>
+					<h2><b style="color:red;">Loadable</b> Component</h2>
+					<p>
+						Aims to make writing PageObjects <b style="color:red;">less pain</b>ful, but there is a catch ...
+					</p>
+					<p class="fragment">
+						it only works well in complex <b style="color:red;">"deep"</b> page hierarchy (journeys), 
+						like SPA.
+					</p>
+					<p class="fragment">
+						<b style="color:red;">Slow</b>LoadableComponent extends the pattern, via adding explicit waits
+						for loading.
+					</p>
+				</section>
+				<section>
+					<img src="images/loadablecomp2.jpg" alt="loadablecomp">
+				</section>
+				<section>
+					<h2><b style="color:red;">Loadable</b> Component (2)</h2>
+					<p>
+						Helps us with <b style="color:red;">asserting</b> that all dynamic content on our 
+						page has been fully loaded and that all elements required in our test script are present on the page.
+					</p>
+					<p>
+						The <b style="color:red;">load()</b> method contains the code that is executed to navigate to the page, while the <b style="color:red;">isLoaded()</b> method is
+						 used to evaluate whether we are on the correct page and whether page loading has finished successfully.
+					</p>
+				</section>
+				<section>
+					<h2>JAVA example</h2>
+					<pre>AddIssue class turned to LoadableComponent
+						<code class="hljs java has-highlights" data-trim="" data-line-numbers="4,8-9">
+							public class AddIssue extends LoadableComponent &lt;AddIssue&gt; {
+  // rest of the class is the same
+  @Override
+  protected void load() {
+    driver.get("https://yourissuetracker.com/issues/new");
+  }
+
+  @Override
+  protected void isLoaded() throws Error {
+    String url = driver.getCurrentUrl();
+    assertTrue("Not on AddIssue page: " + url, url.endsWith("/new"));
+  }
+}
+                        </code></pre>
+				</section>
+				<section>
+					<img src="images/loadablecomp.jpg" alt="loadablecomp" height="670">
+				</section>
+				<section>
+					<h2><b style="color:red;">Screenplay</b> Pattern</h2>
+					<p>
+						An actor-centric model that provides a clear distinction between <b
+							style="color:red;">goals</b>,
+						<b style="color:red;">tasks</b> and <b style="color:red;">actions</b>.
+					</p>
+					<p class="fragment">
+						Thus making it easier for teams to write <b style="color:red;">layered</b> tests more
+						consistently.
+					</p>
+				</section>
+				<section>
+					<h2><b style="color:red;">Screenplay</b> Pattern (2)</h2>
+					<p>
+					Uses good software engineering <b style="color:red;">principles</b> such as the 
+					<ul>
+						<li>Single Responsibility Principle,</li>
+						<li>the Open-Closed Principle,</li>
+						<li>favours composition over inheritance,</li>
+						<li>employs thinking from Domain Driven Design </li>
+						<li>supports effective use of abstraction layers.</li>
+					</ul>
+					</p>	 
+				</section>
+				<section>
+					<img src="images/screenplay.jpg" alt="screenplay">
+				</section>
+				<section data-transition="none">
+					<img src="images/screenplay2.jpg" alt="screenplay">
+				</section>
+				<section data-transition="none">
+					<img src="images/screenplay3.jpg" alt="screenplay">
+				</section>
+				<section data-transition="none">
+					<img src="images/screenplay4.jpg" alt="screenplay">
+				</section>
+				<section data-transition="none">
+					<img src="images/screenplay5.jpg" alt="screenplay">
+				</section>
+				<section data-transition="none">
+					<img src="images/screenplay6.jpg" alt="screenplay">
+				</section>
+				<section data-transition="none">
+					<img src="images/screenplay7.jpg" alt="screenplay">
+				</section >
+				<section data-transition="none">
+					<img src="images/screenplay8.jpg" alt="screenplay">
+				</section>
+				<section>
+					<h2>JS example</h2>
+					<pre>spec/add_issues.js
+						<code class="hljs javascript has-highlights" data-trim="" data-line-numbers="4,8-9">
+							describe('Added issue', () => {
+  it('should be saved', () => {
+    ...
+    const john = Actor.named('John');
+    const issueTitle = 'My valid test issue'
+    john.attemptsTo(
+      Start.withAnEmptyIssueList(),
+      AddIssue.named(issueTitle)
+    )
+    expect(john.toSee(IssueItems.First.Displayed)).equal([ issueTitle ]);  
+  })
+})
+                        </code></pre>
+				</section>
+				<section>
+					<h2><b style="color:red;">Mission</b> Pattern</h2>
+					<blockquote cite="">
+						"The Agent remembers. The Agent uses Tools. The Agent performs Missions."
+					</blockquote>
+					<p class="fragment">
+						Helps us <b style="color:red;">modularise our code</b> and create <b
+							style="color:red;">personas</b> which describe business or functional
+						interactions of software users. Users can also be clients of <b style="color:red;">different
+							layers</b> of your software
+						architecture.
+					</p>
+				</section>
+				<section>
+					<h2><b style="color:red;">Mission</b> Pattern</h2>
+					<img src="images/mission.png" alt="mission">
+				</section>
+				<section>
+					<h2>JS example</h2>
+					<pre>spec/add_issues.js
+						<code class="hljs javascript has-highlights" data-trim="" data-line-numbers="4,8-9">
+							describe('Added issue', () => {
+  it('state should be changed only by admins', () => {
+    ...
+    const agentJohn = newWebCustomerMission.performs(
+                        registerAdminWith('John',adminPassword,dob));
+    agentJohn.obtain(chromeDriver, databaseDriver);
+    webDriverTool = agentJohn.usingThe(chromeDriver);
+    createIssueMission.createIssue(webDriverTool, issueTitle)
+	              .fillIn('issueStateInput', with(issueState))
+                      .clickOn('saveIssueButton');
+    const dbIssue = fetchIssueFromDB(issueTitle).accomplishAs(agentJohn);
+    // secondary concepts are memory and screens
+    agentJohn.keepsInMind('issue.state', bdIssue.State);
+    verifyAs(agentJohn).that(
+      issuesListPage.First.State, hasText(agent.recalls('issue.state')));
+  })
+})
+                        </code></pre>
+				</section>
+	
+			</section>
+
+			<section>
+				<section>
+					<h2><b style="color:red;">Good</b> practices</h2>
+					<img src="images/bulb.jpeg" alt="bulb" height="450">
+				</section>
+				<section>
+					<h2><b style="color:red;">Hermetic</b> Tests</h2>
+					<p>Each test is atomic in nature, so <b style="color:red;">no dependency</b> on other state or data,
+						but its own.</p>
+					<p class="fragment">
+						We can execute the test in different order based on needs, or in parallel, having the <b
+							style="color:red;">same result</b> every time.
+					</p>
+					<p class="fragment">
+						Self-suficient tests give <b style="color:red;">historically reproducible</b> results, thus
+						support our culprit finding
+						(what changes broke the build).
+					</p>
+				</section>
+				<section>
+					<h2>Hermetic Tests (2)</h2>
+					<p><b style="color:red;">Benefits</b>: 
+					  <ul>
+						  <li>Clean start</li>
+						  <li>Resilience</li>
+						  <li>Modularity</li>
+						  <li>Random run order</li>
+						  <li>Parallel testing</li>
+					  </ul>
+					</p>
+				</section>
+				<section>
+					<h2>Hermetic Tests (3)</h2>
+					<p><b style="color:red;">Considerations</b>: 
+					  <ul>
+						  <li>Upfront design</li>
+						  <li>Complexity increase, that needs proper Fixture strategies</li>
+						  <li>Resource usage increase</li>
+					  </ul>
+					</p>
+	
+				</section>
+				<section>
+					<h2><b style="color:red;">Fluent</b> Invocations</h2>
+					<p>
+						Is helping the test developer to <b style="color:red;">determine</b> if he/she can use the
+						object at hand or should switch to other one.
+					</p>
+					<p class="fragment">
+						This pattern is <b style="color:red;">important for scaling</b> a test automation framework. For
+						example, large
+						amount of pages, elements and methods available for usage may create a confusion.
+					</p>
+					<p class="fragment">
+						It allows you to <b style="color:red;">DRY your code</b>, since you avoid putting the object
+						again and again before invoking its methods.
+					</p>
+				</section>
+				<section>
+					<h2>JS example</h2>
+					<pre>pretty standard way
+						<code class="hljs javascript has-highlights" data-trim="" data-line-numbers="4,8-9">
+							describe('Login to account', () => {
+    it('should work with valid credentials', () => {
+        ...
+        homePage.typeUsername(user.email);
+        homePage.typePassword(user.password);
+        homePage.clickSignInButton();
+	  
+        assertThat(homePage.isSignedIn(user));  
+    })
+})
+
+                        </code></pre>
+				</section>
+				<section>
+					<h2>JS example</h2>
+					<pre>chained invocations
+						<code class="hljs javascript has-highlights" data-trim="" data-line-numbers="4,8-9">
+							describe('Login to account', () => {
+    it('should work with valid credentials', () => {
+        ...
+        homePage
+          .typeUsername(user.email);
+          .typePassword(user.password);
+          .clickSignInButton();
+	  
+        assertThat(homePage.isSignedIn(user));  
+    })
+})
+
+                        </code></pre>
+				</section>
+                <section>
+					<h2><b style="color:red;">Back Door</b> Manipulation</h2>
+					<p>
+						We set up the test fixture or verify the outcome by going through a back door (such as direct database
+						 <b style="color:red;">access</b>.)
+					</p>
+					<p class="fragment">
+						If we have access to the state of the SUT, the test can set up the pre-test state 
+						of the SUT by <b style="color:red;">bypassing</b> the normal API and interacting directly with whatever is holding that 
+						state.
+					</p >
+				</section>
+				<section>
+					<h2><b style="color:red;">Back Door</b> Manipulation (2)</h2>
+					<p>
+						Back Door Fixture <b style="color:red;">Setup</b> helps us with Access to the state	of the SUT from outside the UI. 
+						Need to be mindful that,
+					</p>
+					<p class="fragment">
+						we are bypassing a lot of the <b style="color:red;">"edit checks"</b> (input validation) normally done by the UI.
+					</p >
+					<p class="fragment">
+						Tests become much more closely <b style="color:red;">coupled</b> to the System.
+					</p >
+					<p class="fragment">
+					Must leave <b style="color:red;">at least one</b> End-user journey to be covered completely using the GUI.
+					</p >
+				</section>
+				<section>
+					<h2><b style="color:red;">Back Door</b> Manipulation (3)</h2>
+					<p>
+						Back Door <b style="color:red;">Verification</b> can help us assert that actual data is in the persistence layer.
+					</p>
+					<p class="fragment">
+						Back Door <b style="color:red;">Tear Down</b> is especially beneficial if we can use bulk database commands to wipe clean whole DB tables.
+					</p >
+				</section>
+				<section>
+					<h2>JS example</h2>
+					<pre>spec/add_issues.js
+						<code class="hljs javascript has-highlights" data-trim="" data-line-numbers="4,8-9">
+							describe('Added issue', () => {
+  it('state should be changed only by admins', () => {
+    ...
+    // we can leverage Hexagonal Architecture, thus work 
+    // with either a UI or a database
+    agentJohn.obtain(chromeDriver, apiDriver);
+    agentJohn.performs(put('/register', 
+                           requestWith(username,password,dob)), 
+                           returnsStatusCode(201));
+    verifyAs(agentJohn).that(get('/users/',
+                                 requestWith(agentJohn.Id)),
+                                 returnsStatusCode(200));
+  })
+})
+                        </code></pre>
+				</section>
+	
+
+			</section>
+
 			<section>
 				<h2>Conclusion</h2>
 				<p>
-					Better <b style="color:red;">design</b> leads to scalable, maintainable and extendible testing solutions.
+					Always <b style="color:red;">consider the applicability</b> of the design solutions in your context.
 				</p>
 				<p class="fragment">
-					Intentional <b style="color:red;">architecture</b> is not one time thing, as testware evolves.
+					Allow them to <b style="color:red;">evolve and build</b> on top of existing ones.
 				</p>
 				<p class="fragment">
-					Automated tests are integral part of every CI/CD <b style="color:red;">pipeline</b>. 
+					Design for <b style="color:red;">synergy</b> with the other parts of our ecosystem.
 				</p>
 			</section>
+
 			<section>
-					<h2>THANK YOU!</h2>
-					<img width="450" height="300" data-src="images/pacman.gif">
-					<p>Contact me at:</p>
-					<img width="50" height="50" data-src="images/github.png" style="margin-bottom: -10px !important;"> /ekostadinov
-					<img width="50" height="50" data-src="images/gmail.jpg" style="margin-bottom: -10px !important;"> evgenikostadinov
-					<img width="50" height="50" data-src="images/in.png" style="margin-bottom: -10px !important;"> /in/ekostadinov
+				<h2>THANK YOU!</h2>
+				<img width="450" height="300" data-src="images/pacman.gif">
+				<p>Contact me at:</p>
+				<img width="50" height="50" data-src="images/github.png" style="margin-bottom: -10px !important;">
+				/ekostadinov
+				<img width="50" height="50" data-src="images/gmail.jpg" style="margin-bottom: -10px !important;">
+				evgenikostadinov
+				<img width="50" height="50" data-src="images/in.png" style="margin-bottom: -10px !important;">
+				/in/ekostadinov
 			</section>
 
 
